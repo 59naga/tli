@@ -1,0 +1,50 @@
+{
+  "name": "tli",
+  "bin" : "tli",
+  "version": "0.0.0-alpha.0",
+  "description": "Tree command emulator",
+
+  "scripts": {
+    "default": "jasminetea test --verbose --lint",
+
+    "start": "$(opc package scripts.default) --watch",
+    "cover": "$(opc package scripts.default) --cover --report",
+    
+    "test": "npm run cover",
+
+    "prepublish": "node -e \"if(process.env.TRAVIS){}else{process.exit(1)}\" && npm run compile || echo skip prepublish",
+    "compile": "coffee --bare --compile index.coffee",
+    "postcompile": "coffee --output lib --bare --compile src"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run cover"
+    }
+  },
+
+  "dependencies": {
+    "commander": "^2.8.1",
+    "glob": "^5.0.10",
+    "lodash": "^3.9.3"
+  },
+  "devDependencies": {
+    "ghooks": "^0.3.2",
+    "jasminetea": "^0.2.0-beta.2",
+    "object-parser-cli": "0.0.0"
+  },
+  
+  "keywords": [
+    "tree",
+    "cli"
+  ],
+  "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/59naga/tree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/59naga/tree/issues"
+  },
+  "homepage": "https://github.com/59naga/tree#readme"
+}
