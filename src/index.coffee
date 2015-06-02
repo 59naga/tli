@@ -75,7 +75,7 @@ class Tli extends Command
         padding= if i+1 is length then '   ' else '│  '
 
         children= @stringify value,replacer,indent+padding
-        lines+= child for child in children+'\n'
+        lines+= child for child in children
 
       i++
 
