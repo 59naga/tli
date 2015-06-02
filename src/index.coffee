@@ -31,11 +31,13 @@ class Tli extends Command
       console.log JSON.stringify tree,null,2
     else
       console.log (path.relative process.cwd(),cwd) or '.'
-      console.log @stringify(result.tree).join('\n')+'\n'
+      console.log @stringify(result.tree)+'\n'
       console.log '%s directories, %s files',result.directory,result.file
 
   treeSync: (cwd,options={})->
     tree= {}
+
+    options.level?= 99
 
     root= path.join cwd,'**'
     lines= Glob.sync root
@@ -61,19 +63,19 @@ class Tli extends Command
     {tree,directory,file}
 
   stringify: (tree,replacer=null,indent='')->
-    lines= []
+    lines= ''
 
     i= 0
     length= Object.keys(tree).length
     for key,value of tree
       rule= if i+1 is length then '└' else '├'
-      lines.push indent+rule+'─ '+key
+      lines+= indent+rule+'─ '+key+'\n'
 
       if value instanceof Object
         padding= if i+1 is length then '   ' else '│  '
 
         children= @stringify value,replacer,indent+padding
-        lines.push child for child in children
+        lines+= child for child in children+'\n'
 
       i++
 
