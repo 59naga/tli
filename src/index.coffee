@@ -32,8 +32,6 @@ class Tli extends Command
     else
       console.log (path.relative process.cwd(),cwd) or '.'
       console.log @stringify(result.tree).join('\n')+'\n'
-
-    if @summary
       console.log '%s directories, %s files',result.directory,result.file
 
   treeSync: (cwd,options={})->

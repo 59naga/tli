@@ -2,14 +2,27 @@
 
 > Tree command emulator
 
+# CLI
+
 ## Installation
 ```bash
 $ npm install tli --global
 $ tli -V
 # 0.0.0
+
+$ tli --help
+#
+#  Usage: tli /path/to/dir
+#
+#  Options:
+#
+#    -h, --help          output usage information
+#    -L --level <level>  Descend only level directories deep.
+#    -j --json           Output json
 ```
 
-# CLI
+## Try
+
 ```bash
 $ tli
 .
@@ -28,25 +41,12 @@ $ tli
 │        └─ guwa-
 └─ index.coffee
 
-8 directories, 6 files
-```
-
-## Options
-```bash
-$ tli --help
-#
-#  Usage: tli /path/to/dir
-#
-#  Options:
-#
-#    -h, --help          output usage information
-#    -L --level <level>  Descend only level directories deep.
-#    -j --json           Output json
+10 directories, 10 files
 ```
 
 # API
 ```bash
-$ npm install tli
+$ npm install tli --save
 ```
 
 ## `.treeSync(path)` -> `{file,directory,tree}`
@@ -83,6 +83,7 @@ Prettify the `tree` object
 var tli= require('tli');
 var result= tli.treeSync(__dirname);
 var tree= tli.stringify(result.tree);
+
 console.log(tree);
 //├─ baz
 //│  ├─ beep
