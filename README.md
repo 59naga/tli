@@ -42,7 +42,54 @@ $ tli --help
 #    -h, --help          output usage information
 #    -L --level <level>  Descend only level directories deep.
 #    -j --json           Output json
-#    -N --no-summary     Hide count
+```
+
+# API
+```bash
+$ npm install tli
+```
+
+## `.treeSync(path)` -> `{file,directory,tree}`
+
+File and directory synchronous searching.
+
+```js
+var tli= require('tli');
+
+var result= tli.treeSync(__dirname);
+console.log(result);
+// {
+//   file: 2,
+//   directory: 3,
+//
+//   tree: {
+//     baz: {
+//       beep: 1024,//bytes
+//       boop: 2048,
+//     },
+//     foo: {
+//       bar: {},
+//     },
+//     noop: {},
+//   },
+// }
+```
+
+## `.stringify(tree)` -> `treeString`
+
+Prettify the `tree` object
+
+```js
+var tli= require('tli');
+var result= tli.treeSync(__dirname);
+var tree= tli.stringify(result.tree);
+console.log(tree);
+//├─ baz
+//│  ├─ beep
+//│  └─ boop
+//├─ foo
+//│  └─ bar
+//└─ noop
 ```
 
 License

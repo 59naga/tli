@@ -14,7 +14,6 @@ class Tli extends Command
     @usage '/path/to/dir'
     @option '-L --level <level>','Descend only level directories deep.',99
     @option '-j --json', 'Transform to json'
-    @option '-N --no-summary', 'Hide summary'
 
   parse: (argv)->
     super
@@ -25,43 +24,43 @@ class Tli extends Command
       else
         process.cwd()
 
-    tree= @treeSync cwd,this
-    return tree if @test
+    result= @treeSync cwd,this
+    return result.tree if @test
 
     if @json
       console.log JSON.stringify tree,null,2
     else
       console.log (path.relative process.cwd(),cwd) or '.'
-      console.log @stringify(tree).join('\n')+'\n'
+      console.log @stringify(result.tree).join('\n')+'\n'
 
     if @summary
-      console.log '%s directories, %s files',count_dir,count_file
+      console.log '%s directories, %s files',result.directory,result.file
 
   treeSync: (cwd,options={})->
     tree= {}
 
     root= path.join cwd,'**'
-    files= Glob.sync root
-    files.sort()
+    lines= Glob.sync root
+    lines.sort()
 
-    count_dir= 0
-    count_file= 0
-    for file in files
-      stat= fs.statSync file
-      filePath= path.relative cwd,file
-      fileLocale= filePath.split path.sep
-      continue unless filePath.length
-      continue if fileLocale.length > options.level
+    file= 0
+    directory= 0
+    for line in lines
+      stat= fs.statSync line
+      lineRelative= path.relative cwd,line
+      lineLevel= lineRelative.split path.sep
+      continue unless lineRelative.length
+      continue if lineLevel.length > options.level
 
       if stat.isDirectory()
-        _.set tree, fileLocale, {}
-        count_dir++
+        _.set tree, lineLevel, {}
+        directory++
 
       else
-        _.set tree, fileLocale, stat.size
-        count_file++
+        _.set tree, lineLevel, stat.size
+        file++
 
-    tree
+    {tree,directory,file}
 
   stringify: (tree,replacer=null,indent='')->
     lines= []
