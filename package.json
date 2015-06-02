@@ -1,7 +1,7 @@
 {
   "name": "tli",
   "bin" : "tli",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0",
   "description": "Tree command emulator",
 
   "scripts": {
@@ -41,10 +41,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/59naga/tree.git"
+    "url": "git+https://github.com/59naga/tli.git"
   },
   "bugs": {
-    "url": "https://github.com/59naga/tree/issues"
+    "url": "https://github.com/59naga/tli/issues"
   },
-  "homepage": "https://github.com/59naga/tree#readme"
+  "homepage": "https://github.com/59naga/tli#readme"
 }
