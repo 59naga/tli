@@ -28,7 +28,7 @@ class Tli extends Command
     return result.tree if @test
 
     if @json
-      console.log JSON.stringify tree,null,2
+      console.log JSON.stringify result.tree,null,2
     else
       console.log (path.relative process.cwd(),cwd) or '.'
       console.log @stringify(result.tree)+'\n'
