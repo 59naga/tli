@@ -31,7 +31,7 @@ class Tli extends Command
       console.log JSON.stringify result.tree,null,2
     else
       console.log (path.relative process.cwd(),cwd) or '.'
-      console.log @stringify(result.tree)+'\n'
+      console.log @stringify result.tree
       console.log '%s directories, %s files',result.directory,result.file
 
   treeSync: (cwd,options={})->
@@ -69,10 +69,10 @@ class Tli extends Command
     length= Object.keys(tree).length
     for key,value of tree
       rule= if i+1 is length then '└' else '├'
-      lines+= indent+rule+'─ '+key+'\n'
+      lines+= indent+rule+'── '+key+'\n'
 
       if value instanceof Object
-        padding= if i+1 is length then '   ' else '│  '
+        padding= if i+1 is length then '    ' else '│   '
 
         children= @stringify value,replacer,indent+padding
         lines+= child for child in children
