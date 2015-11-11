@@ -1,8 +1,14 @@
 {
   "name": "tli",
   "bin" : "tli",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1",
   "description": "Tree command emulator",
+
+  "main": "lib",
+  "files": [
+    "lib",
+    "tli"
+  ],
 
   "scripts": {
     "default": "jasminetea test --verbose --lint",
@@ -13,8 +19,7 @@
     "test": "npm run cover",
 
     "prepublish": "node -e \"if(process.env.TRAVIS){}else{process.exit(1)}\" && npm run compile || echo skip prepublish",
-    "compile": "coffee --bare --compile index.coffee",
-    "postcompile": "coffee --output lib --bare --compile src"
+    "compile": "coffee --output lib --bare --compile src"
   },
   "config": {
     "ghooks": {
@@ -29,8 +34,8 @@
   },
   "devDependencies": {
     "ghooks": "^0.3.2",
-    "jasminetea": "^0.2.0-beta.2",
-    "object-parser-cli": "0.0.0"
+    "jasminetea": "^0.2.1",
+    "object-parser-cli": "0.0.1"
   },
   
   "keywords": [
